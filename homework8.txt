@@ -1,4 +1,4 @@
-List the oldest 10 Victoria, BC users and order them by age
+1) List the oldest 10 Victoria, BC users and order them by age
 select Top 10 DisplayName, Location  from Users
 where (Location LIKE 'Victoria, BC') ORDER BY Age Desc
 	
@@ -13,7 +13,7 @@ where (Location LIKE 'Victoria, BC') ORDER BY Age Desc
 	9)logan
 	10)acorscadden
 
-List the top 10 highest reputation users in Victoria that have answered questions with the tag javascript
+2)List the top 10 highest reputation users in Victoria that have answered questions with the tag javascript
 SELECT TOP 10
     ROW_NUMBER() OVER(ORDER BY Reputation DESC) AS [#], 
     u.Id AS [User Link], 
@@ -41,7 +41,7 @@ ORDER BY
 	8) logan
 	9) Tyler Sebastian
 	10) Steve Adams
-List the top 5 Victoria developers by accepted answer percentage
+3)List the top 5 Victoria developers by accepted answer percentage
 
 -- Top Accepted Answer Percentage
 -- Displays the top X users according to their accepted answer percentage,
@@ -80,7 +80,7 @@ ORDER BY
 	5)Craig Shutko
 
 
-List the top 10 Victoria developers by accepted answer percentage on questions with the tag javascript
+4)List the top 10 Victoria developers by accepted answer percentage on questions with the tag javascript
 
 -- Top Accepted Answer Percentage
 -- Displays the top X users according to their accepted answer percentage,
