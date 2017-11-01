@@ -10,8 +10,8 @@ where (Location LIKE 'Victoria, BC') ORDER BY Age Desc
 	6)literaphile
 	7)robru
 	8)brandonscript
-	9)acorscadden
-	10)Logan
+	9)logan
+	10)acorscadden
 
 List the top 10 highest reputation users in Victoria that have answered questions with the tag javascript
 SELECT TOP 10
@@ -72,6 +72,3 @@ ORDER BY
 
 
 List the top 10 Victoria developers by accepted answer percentage on questions with the tag javascript
-
-
-
