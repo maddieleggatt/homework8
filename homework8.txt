@@ -43,10 +43,6 @@ ORDER BY
 	10) Steve Adams
 3)List the top 5 Victoria developers by accepted answer percentage
 
--- Top Accepted Answer Percentage
--- Displays the top X users according to their accepted answer percentage,
--- within the group of users with more than Y answers in total.
--- Looks only within open, non-CW questions and answers.
 SELECT  TOP 5
         a.OwnerUserId AS [User Link],
         Count(a.Id) AS [Total Answers],
@@ -82,10 +78,6 @@ ORDER BY
 
 4)List the top 10 Victoria developers by accepted answer percentage on questions with the tag javascript
 
--- Top Accepted Answer Percentage
--- Displays the top X users according to their accepted answer percentage,
--- within the group of users with more than Y answers in total.
--- Looks only within open, non-CW questions and answers.
 SELECT  TOP 10
         a.OwnerUserId AS [User Link],
         Count(a.Id) AS [Total Answers],
