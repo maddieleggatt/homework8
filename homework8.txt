@@ -31,7 +31,7 @@ group by u.reputation, u.id
 ORDER BY
     Reputation DESC;
 	
-  1) brandonscript
+  	1) brandonscript
 	2) Kevin Sylvestre
 	3) aardcarkk
 	4) Jonathon Watney
@@ -41,8 +41,12 @@ ORDER BY
 	8) logan
 	9) Tyler Sebastian
 	10) Steve Adams
-    
 List the top 5 Victoria developers by accepted answer percentage
+
+-- Top Accepted Answer Percentage
+-- Displays the top X users according to their accepted answer percentage,
+-- within the group of users with more than Y answers in total.
+-- Looks only within open, non-CW questions and answers.
 SELECT  TOP 5
         a.OwnerUserId AS [User Link],
         Count(a.Id) AS [Total Answers],
@@ -50,8 +54,12 @@ SELECT  TOP 5
         Round(Sum(CASE q.AcceptedAnswerId WHEN a.Id THEN 1 ELSE 0 END) * 100.0 / Count(a.Id), 1) AS [Percentage Accepted]
 FROM    Posts AS a
 JOIN    Posts AS q
-     ON a.ParentId = q.Id
+     ON a.ParentId = q.Id , 
+        Users AS u
 WHERE
+  LOWER(u.Location) LIKE '%##cityname##%' AND 
+  u.Id = a.OwnerUserId AND 
+
         q.PostTypeId = 1
 --    AND q.ClosedDate IS NULL
 --    AND q.CommunityOwnedDate IS NULL
@@ -60,15 +68,60 @@ WHERE
 --    AND a.CommunityOwnedDate IS NULL
 GROUP BY
         a.OwnerUserId
-HAVING
-        Count(a.Id) > ##MinimumAnswersPerUser##
+--HAVING
+    --    Count(a.Id) > ##MinimumAnswersPerUser##
 ORDER BY
         [Percentage Accepted] DESC
-1)Mitch Kelly
-2)Guilherme Lima Pereira
-3)parthasarathy
-4)Jacob Dixon
-5)user246211
+
+	1)Yaniv Ran
+	2)zach
+	3)nickfletcher
+	4)Starnetter
+	5)Craig Shutko
 
 
 List the top 10 Victoria developers by accepted answer percentage on questions with the tag javascript
+
+-- Top Accepted Answer Percentage
+-- Displays the top X users according to their accepted answer percentage,
+-- within the group of users with more than Y answers in total.
+-- Looks only within open, non-CW questions and answers.
+SELECT  TOP 10
+        a.OwnerUserId AS [User Link],
+        Count(a.Id) AS [Total Answers],
+        Sum(CASE q.AcceptedAnswerId WHEN a.Id THEN 1 ELSE 0 END) AS [Accepted Answers],  
+        Round(Sum(CASE q.AcceptedAnswerId WHEN a.Id THEN 1 ELSE 0 END) * 100.0 / Count(a.Id), 1) AS [Percentage Accepted]
+FROM    Posts AS a
+JOIN    Posts AS q
+     ON a.ParentId = q.Id , 
+        Users AS u
+WHERE
+  LOWER(u.Location) LIKE '%##cityname##%' AND 
+  u.Id = a.OwnerUserId AND 
+  LOWER(q.tags) LIKE '%javascript%' AND
+
+        q.PostTypeId = 1
+--    AND q.ClosedDate IS NULL
+--    AND q.CommunityOwnedDate IS NULL
+    AND a.PostTypeId = 2
+--    AND a.ClosedDate IS NULL
+--    AND a.CommunityOwnedDate IS NULL
+GROUP BY
+        a.OwnerUserId
+--HAVING
+    --    Count(a.Id) > ##MinimumAnswersPerUser##
+ORDER BY
+        [Percentage Accepted] DESC
+	
+	1)Suraiya Khan
+	2)Nick Rempel
+	3)cecil
+	4)Matt Bennett
+	5)Iain Duncan
+	6)Ty H
+	7)Yokel Pole
+	8)llion
+	9)Alastair
+	10)Matthew Lehner
+    
+
