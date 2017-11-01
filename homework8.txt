@@ -1,0 +1,77 @@
+List the oldest 10 Victoria, BC users and order them by age
+select Top 10 DisplayName, Location  from Users
+where (Location LIKE 'Victoria, BC') ORDER BY Age Desc
+	
+	1)mountaineer2525 (oldest)
+	2)codexmas
+	3)Omid Zamani
+	4)MarcClintDion
+	5)ChalkTalk
+	6)literaphile
+	7)robru
+	8)brandonscript
+	9)acorscadden
+	10)Logan
+
+List the top 10 highest reputation users in Victoria that have answered questions with the tag javascript
+SELECT TOP 10
+    ROW_NUMBER() OVER(ORDER BY Reputation DESC) AS [#], 
+    u.Id AS [User Link], 
+    u.Reputation,
+    count(p.id)
+FROM
+    Users u
+inner join posts p on p.ownerUserid = u.id
+inner join posttags pt on pt.postid = p.id
+inner join tags t on t.id = pt.tagid
+WHERE
+    LOWER(Location) LIKE LOWER('%##cityname##%')
+    and t.tagname='##tagname##'
+group by u.reputation, u.id
+ORDER BY
+    Reputation DESC;
+	
+  1) brandonscript
+	2) Kevin Sylvestre
+	3) aardcarkk
+	4) Jonathon Watney
+	5) Bodman
+	6) Matthew Lehner
+	7) mtpultz
+	8) logan
+	9) Tyler Sebastian
+	10) Steve Adams
+    
+List the top 5 Victoria developers by accepted answer percentage
+SELECT  TOP 5
+        a.OwnerUserId AS [User Link],
+        Count(a.Id) AS [Total Answers],
+        Sum(CASE q.AcceptedAnswerId WHEN a.Id THEN 1 ELSE 0 END) AS [Accepted Answers],  
+        Round(Sum(CASE q.AcceptedAnswerId WHEN a.Id THEN 1 ELSE 0 END) * 100.0 / Count(a.Id), 1) AS [Percentage Accepted]
+FROM    Posts AS a
+JOIN    Posts AS q
+     ON a.ParentId = q.Id
+WHERE
+        q.PostTypeId = 1
+--    AND q.ClosedDate IS NULL
+--    AND q.CommunityOwnedDate IS NULL
+    AND a.PostTypeId = 2
+--    AND a.ClosedDate IS NULL
+--    AND a.CommunityOwnedDate IS NULL
+GROUP BY
+        a.OwnerUserId
+HAVING
+        Count(a.Id) > ##MinimumAnswersPerUser##
+ORDER BY
+        [Percentage Accepted] DESC
+1)Mitch Kelly
+2)Guilherme Lima Pereira
+3)parthasarathy
+4)Jacob Dixon
+5)user246211
+
+
+List the top 10 Victoria developers by accepted answer percentage on questions with the tag javascript
+
+
+
